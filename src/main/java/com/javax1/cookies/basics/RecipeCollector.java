@@ -31,7 +31,7 @@ public class RecipeCollector {
      * @return the number of recipes in the stream
      */
     public static long countRecipes(Stream<Recipe> recipes) {
-        return recipes.count();
+        return 0;
     }
 
     /**
@@ -44,7 +44,7 @@ public class RecipeCollector {
      * @return the number of distinct recipes in the stream
      */
     public static long uniqueRecipeCount(Stream<Recipe> recipes) {
-        return recipes.distinct().count();
+        return 0;
     }
 
     /**
@@ -57,7 +57,7 @@ public class RecipeCollector {
      * @return a collection with the same recipes just without any duplicate elements
      */
     public static Collection<Recipe> removeDuplicateRecipes(Stream<Recipe> recipes) {
-        return recipes.collect(Collectors.toUnmodifiableSet());
+        return null;
     }
 
     /**
@@ -73,7 +73,7 @@ public class RecipeCollector {
      * @return the only recipes with less than 300g sugar in them
      */
     public static Collection<Recipe> filterForNotTooSweetRecipes(Stream<Recipe> recipes) {
-        return recipes.filter(r -> r.sugar() < 300).collect(Collectors.toUnmodifiableSet());
+        return null;
     }
 
     /**
@@ -89,7 +89,7 @@ public class RecipeCollector {
      * @return a collection of cookie names
      */
     public static Collection<String> getCookieNames(Stream<Recipe> recipes) {
-        return recipes.map(Recipe::name).collect(Collectors.toUnmodifiableSet());
+        return null;
     }
 
     /**
@@ -102,7 +102,7 @@ public class RecipeCollector {
      * @return a collection of (not too sweet) cookie names
      */
     public static Collection<String> notTooSweetCookieNames(Stream<Recipe> recipes) {
-        return getCookieNames(filterForNotTooSweetRecipes(recipes).stream());
+        return null;
     }
 
     /**
@@ -117,7 +117,7 @@ public class RecipeCollector {
      * @return the amount of sugar from each recipe summed
      */
     public static int sugarSumOfRecipes(Stream<Recipe> recipes) {
-        return recipes.mapToInt(Recipe::sugar).sum();
+        return 0;
     }
 
     /**
@@ -136,7 +136,7 @@ public class RecipeCollector {
      * @return a collection of ingredients (Strings) without duplicates
      */
     public static Collection<String> listIngredients(Stream<Recipe> recipes) {
-        return recipes.map(Recipe::ingredients).flatMap(m -> m.keySet().stream()).collect(Collectors.toUnmodifiableSet());
+        return null;
     }
 
     /**
@@ -156,7 +156,7 @@ public class RecipeCollector {
      * @return the recipe with the highest difficulty
      */
     public static Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
-        return recipes.max(Comparator.comparingInt(Recipe::difficulty)).get();
+        return null;
     }
 
     /**
@@ -171,7 +171,7 @@ public class RecipeCollector {
      * @return the map of ingredients with amounts
      */
     public static Map<String, Integer> collectNameAndSugar(Stream<Recipe> recipes) {
-        return recipes.collect(toMap(Recipe::name, Recipe::sugar));
+        return null;
     }
 
     /**
@@ -188,7 +188,7 @@ public class RecipeCollector {
      * @return the name of this abomination
      */
     public static String frankenCookie(Stream<Recipe> recipes) {
-        return recipes.map(Recipe::name).collect(joining());
+        return null;
     }
 
     /**
@@ -204,7 +204,7 @@ public class RecipeCollector {
      * @return a true/false value indicating whether we will pass the inspection
      */
     public static boolean inspectionSugar(Stream<Recipe> recipes) {
-        return recipes.noneMatch(recipe -> recipe.sugar() > 1000);
+        return false;
     }
 
     /**
@@ -220,7 +220,7 @@ public class RecipeCollector {
      */
     public static boolean inspectionIngredient(Stream<Recipe> recipes) {
         final String ingredient = "an impending sense of doom";
-        return recipes.anyMatch(recipe -> recipe.ingredients().containsKey(ingredient));
+        return false;
     }
 
     /**
@@ -259,7 +259,7 @@ public class RecipeCollector {
      * @return the Ultimate Cookie Recipe
      */
     public static Recipe createUltimateRecipe(Stream<Recipe> recipes, Recipe blank) {
-        return recipes.reduce(blank, Recipe::merge);
+        return null;
     }
 
 }

@@ -28,7 +28,7 @@ public class CookieManager {
      * @return a map where cookies are organized by their category
      */
     public static Map<Cookie.Category, List<Cookie>> groupedByCookieCategory(Stream<Cookie> cookies) {
-        return cookies.collect(Collectors.groupingBy(Cookie::category));
+        return null;
     }
 
     /**
@@ -45,10 +45,6 @@ public class CookieManager {
      * @return a map of cookie categories and the highest rated cookie in that category
      */
     public static Map<Cookie.Category, Cookie> groupedAndHighestRated(Stream<Cookie> cookies, Cookie unrated) {
-        return cookies.collect(
-                Collectors.groupingBy(
-                        Cookie::category,
-                        reducing(unrated, maxBy(comparingInt(Cookie::rating)))
-                ));
+        return null;
     }
 }

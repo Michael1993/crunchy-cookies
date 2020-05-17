@@ -30,7 +30,7 @@ public class CookieFactory {
      * @return the same cookie now in a stream
      */
     public static Stream<Cookie> cookieStream(Cookie[] cookies) {
-        return Stream.of(cookies);
+        return null;
     }
 
     /**
@@ -44,7 +44,7 @@ public class CookieFactory {
      * @return the same ratings in an IntStream
      */
     public static IntStream ratingsToStream(int[] ratings) {
-        return Arrays.stream(ratings);
+        return null;
     }
 
     /**
@@ -59,7 +59,7 @@ public class CookieFactory {
      * @return all batches together in a stream.
      */
     public static Stream<Cookie> multipleCookieBatchesToStream(Cookie[]... batches) {
-        return Stream.of(batches).flatMap(Stream::of);
+        return null;
     }
 
     /**
@@ -75,7 +75,7 @@ public class CookieFactory {
      * @return a stream with all the cookies from both batches
      */
     public static Stream<Cookie> combiningStreams(Stream<Cookie> firstBatch, Stream<Cookie> secondBatch) {
-        return Stream.concat(firstBatch, secondBatch);
+        return null;
     }
 
     /**
@@ -90,7 +90,7 @@ public class CookieFactory {
      * @return a stream with cookies from the supplier
      */
     public static Stream<Cookie> suppliedCookies(CookieSupplier cookieSupplier) {
-        return Stream.generate(cookieSupplier);
+        return null;
     }
 
     /**
@@ -105,7 +105,7 @@ public class CookieFactory {
      * @return a stream without the sentient cookies
      */
     public static Stream<Cookie> faultySuppliedCookies(CookieSupplier cookieSupplier) {
-        return Stream.generate(cookieSupplier).skip(3);
+        return null;
     }
 
     /**
@@ -122,7 +122,7 @@ public class CookieFactory {
      * @return a stream with no sentient cookies
      */
     public static Stream<Cookie> moreFaultySuppliedCookies(CookieSupplier cookieSupplier) {
-        return Stream.generate(cookieSupplier).dropWhile(cookie -> cookie.category() == Cookie.Category.ELDRITCH);
+        return null;
     }
 
     /**
@@ -140,7 +140,7 @@ public class CookieFactory {
      * @return a stream with only 12 elements in it
      */
     public static Stream<Cookie> limitedCookieStream(CookieSupplier cookieSupplier) {
-        return Stream.generate(cookieSupplier).limit(12);
+        return null;
     }
 
     /**
@@ -159,6 +159,6 @@ public class CookieFactory {
      * @return a stream with no sentient cookies
      */
     public static Stream<Cookie> sentienceGainingCookieSupplier(CookieSupplier cookieSupplier) {
-        return Stream.generate(cookieSupplier).takeWhile(cookie -> cookie.category() != Cookie.Category.ELDRITCH);
+        return null;
     }
 }
