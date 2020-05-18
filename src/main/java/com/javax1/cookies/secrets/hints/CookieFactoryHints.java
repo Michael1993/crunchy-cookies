@@ -1,4 +1,4 @@
-package com.javax1.cookies.advanced;
+package com.javax1.cookies.secrets.hints;
 
 import com.javax1.cookies.secrets.Cookie;
 import com.javax1.cookies.secrets.supplier.CookieSupplier;
@@ -6,7 +6,7 @@ import com.javax1.cookies.secrets.supplier.CookieSupplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public interface CookieFactoryHintInterface {
+public interface CookieFactoryHints {
     /**
      * HINT: There is a static factory method
      * for streams.

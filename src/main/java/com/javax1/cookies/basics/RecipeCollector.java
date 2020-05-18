@@ -1,6 +1,7 @@
 package com.javax1.cookies.basics;
 
 import com.javax1.cookies.secrets.Recipe;
+import com.javax1.cookies.secrets.hints.RecipeCollectorHints;
 
 import java.util.Collection;
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
  * <p>
  * Maybe you could help?
  */
-public class RecipeCollector implements RecipeHintInterface {
+public class RecipeCollector implements RecipeCollectorHints {
     /**
      * The company is very impressed with the efforts that went into this recipe collecting endeavour.
      * Truly impressive work, we managed to collect, uh... how many recipes again? Could you help us out?

@@ -1,6 +1,7 @@
 package com.javax1.cookies.advanced;
 
 import com.javax1.cookies.secrets.Cookie;
+import com.javax1.cookies.secrets.hints.CookieFactoryHints;
 import com.javax1.cookies.secrets.supplier.CookieSupplier;
 
 import java.util.stream.IntStream;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
  * This class contains exercises about creating
  * Streams.
  */
-public class CookieFactory implements CookieFactoryHintInterface {
+public class CookieFactory implements CookieFactoryHints {
 
     /**
      * We have an array of Cookies but no one

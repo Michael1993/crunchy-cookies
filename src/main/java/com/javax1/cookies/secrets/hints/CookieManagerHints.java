@@ -1,4 +1,4 @@
-package com.javax1.cookies.advanced;
+package com.javax1.cookies.secrets.hints;
 
 import com.javax1.cookies.secrets.Cookie;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public interface CookieHintInterface {
+public interface CookieManagerHints {
     /**
      * HINT: Use the groupingBy() collector.
      */

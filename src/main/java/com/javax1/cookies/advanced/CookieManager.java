@@ -1,6 +1,7 @@
 package com.javax1.cookies.advanced;
 
 import com.javax1.cookies.secrets.Cookie;
+import com.javax1.cookies.secrets.hints.CookieManagerHints;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
  * production. Now they are a very serious business in need of your help for
  * deciding how to advance with their business strategy.
  */
-public class CookieManager implements CookieHintInterface {
+public class CookieManager implements CookieManagerHints {
 
     /**
      * We have a stream of cookies. Unorganized.

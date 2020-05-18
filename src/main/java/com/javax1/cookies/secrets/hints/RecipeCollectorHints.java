@@ -1,4 +1,4 @@
-package com.javax1.cookies.basics;
+package com.javax1.cookies.secrets.hints;
 
 import com.javax1.cookies.secrets.Recipe;
 
@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public interface RecipeHintInterface {
+public interface RecipeCollectorHints {
 
     /**
      * HINT: Try using count()!
