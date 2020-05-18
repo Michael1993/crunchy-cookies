@@ -38,13 +38,13 @@ public class CookieManager {
      * method. Rating is always at least 1 and every category
      * has at least one cookie.
      * <p>
-     * HINT: Use groupingBy and another collector.
+     * HINT: Use groupingBy and the 'reducing' collector.
      *
      * @param cookies a stream of cookies
      * @param unrated a cookie with a rating of 0
      * @return a map of cookie categories and the highest rated cookie in that category
      */
     public static Map<Cookie.Category, Cookie> groupedAndHighestRated(Stream<Cookie> cookies, Cookie unrated) {
-        return null;
+        return cookies.collect(Collectors.groupingBy(Cookie::category, reducing(unrated, maxBy(comparingInt(Cookie::rating)))));
     }
 }

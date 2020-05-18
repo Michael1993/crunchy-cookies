@@ -56,7 +56,7 @@ public class RecipeCollectorTests {
     }
 
     @Test
-    @DisplayName("Only recipes with less than 200g sugar should remain when calling 'filterForNotTooSweetRecipes'.")
+    @DisplayName("Only recipes with less than 300g sugar should remain when calling 'filterForNotTooSweetRecipes'.")
     void notTooSweet() {
         // GIVEN
         var recipes = RecipeStore.notDuplicateRecipes();

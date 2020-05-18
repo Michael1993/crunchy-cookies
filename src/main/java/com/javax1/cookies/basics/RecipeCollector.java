@@ -150,7 +150,7 @@ public class RecipeCollector {
      *
      * (the difficulty is returned by the 'difficulty()' method)
      *
-     * HINT: Try using max() and Comparators.comparingInt()!
+     * HINT: Try using max() and Comparator.comparingInt()!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the recipe with the highest difficulty

@@ -51,9 +51,7 @@ public class Recipe {
     public Recipe merge(Recipe recipe) {
         recipe.ingredients().forEach(
                 (ingredient, amount) -> {
-                    ingredients.computeIfPresent(ingredient, (__, value) -> Math.max(amount, value));
-                    // OR
-                    ingredients.putIfAbsent(ingredient, amount);
+                    ingredients.merge(ingredient, amount, Math::max);
                 }
         );
         return this;
