@@ -227,22 +227,20 @@ public class RecipeCollector implements RecipeHintInterface {
      * added.
      * <p>
      * Take the following recipes for example:
-     * -----------------------------------
-     * |    Recipe #1    |   Recipe # 2  |
-     * |-----------------|---------------|
-     * |    Sugar: 200   |   Sugar: 300  |
-     * |    Eggs: 5      |   Milk: 200   |
-     * |    Flour: 150   |   Flour: 100  |
-     * -----------------------------------
+     * Recipe #1:
+     *  - Sugar: 200
+     *  - Eggs: 5
+     *  - Flour: 150
+     * Recipe #2:
+     *  - Sugar: 300
+     *  - Milk: 200
+     *  - Flour: 100
      * For these two recipes the Ultimate Cookie Recipe would be:
-     * ------------------
-     * |    Ultimate    |
-     * |----------------|
-     * |    Sugar: 300  |
-     * |    Eggs: 5     |
-     * |    Milk: 200   |
-     * |    Flour: 150  |
-     * ------------------
+     * Ultimate Cookie Recipe:
+     *  - Sugar: 300
+     *  - Eggs: 5
+     *  - Milk: 200
+     *  - Flour: 150
      *
      * @param recipes a stream of recipes
      * @return the Ultimate Cookie Recipe
