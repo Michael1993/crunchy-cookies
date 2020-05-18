@@ -2,15 +2,9 @@ package com.javax1.cookies.advanced;
 
 import com.javax1.cookies.secrets.Cookie;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.Comparator.comparingInt;
-import static java.util.function.BinaryOperator.maxBy;
-import static java.util.stream.Collectors.reducing;
 
 /**
  * The Crunchy Cookie Company has been thriving since you helped set up
@@ -46,7 +40,7 @@ public class CookieManager implements CookieHintInterface {
      */
     @Override
     public Map<Cookie.Category, Cookie> groupedAndHighestRated(Stream<Cookie> cookies, Cookie unrated) {
-        return cookies.collect(Collectors.groupingBy(Cookie::category, reducing(unrated, maxBy(comparingInt(Cookie::rating)))));
+        return null;
     }
 
     /**
@@ -64,10 +58,7 @@ public class CookieManager implements CookieHintInterface {
      */
     @Override
     public List<Cookie> minMaxRatedCookies(Stream<Cookie> cookies) {
-        return cookies.collect(Collectors.teeing(
-                Collectors.minBy(comparingInt(Cookie::rating)),
-                Collectors.maxBy(comparingInt(Cookie::rating)),
-                (min, max) -> List.of(min.get(), max.get())));
+        return null;
     }
 
     /**
@@ -83,7 +74,7 @@ public class CookieManager implements CookieHintInterface {
      */
     @Override
     public List<Cookie> topThreeCookies(Stream<Cookie> cookies) {
-        return cookies.sorted(Comparator.comparingInt(Cookie::rating).reversed()).limit(3).collect(Collectors.toList());
+        return null;
     }
 
     /**
@@ -99,7 +90,7 @@ public class CookieManager implements CookieHintInterface {
      */
     @Override
     public Cookie topCookieOfCategory(Stream<Cookie> cookies) {
-        return cookies.filter(cookie -> cookie.category().equals(Cookie.Category.ELDRITCH)).max(Comparator.comparingInt(Cookie::rating)).get();
+        return null;
     }
 
 }
