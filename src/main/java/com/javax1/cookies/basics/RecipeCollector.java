@@ -3,13 +3,8 @@ package com.javax1.cookies.basics;
 import com.javax1.cookies.secrets.Recipe;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toMap;
 
 /**
  * INSTRUCTIONS:
@@ -19,44 +14,43 @@ import static java.util.stream.Collectors.toMap;
  * <p>
  * Maybe you could help?
  */
-public class RecipeCollector {
-
+public class RecipeCollector implements RecipeHintInterface {
     /**
      * The company is very impressed with the efforts that went into this recipe collecting endeavour.
      * Truly impressive work, we managed to collect, uh... how many recipes again? Could you help us out?
-     * <p>
-     * HINT: Try using count()!
      *
      * @param recipes a stream of recipes we want to count
      * @return the number of recipes in the stream
+     * @inheritDoc
      */
-    public static long countRecipes(Stream<Recipe> recipes) {
+    @Override
+    public long countRecipes(Stream<Recipe> recipes) {
         return 0;
     }
 
     /**
      * Apparently some recipes are not unique. We would like to know how many unique recipes we have.
      * Try solving this without using the 'collect()' method.
-     * <p>
-     * HINT: We are only interested in a Recipe if it's 'distinct'.
      *
      * @param recipes a stream of recipes
      * @return the number of distinct recipes in the stream
+     * @inheritDoc
      */
-    public static long uniqueRecipeCount(Stream<Recipe> recipes) {
+    @Override
+    public long uniqueRecipeCount(Stream<Recipe> recipes) {
         return 0;
     }
 
     /**
      * We have a lot of duplicate recipes, unfortunately. We would like to have a collection of recipes
      * but without the duplicates.
-     * <p>
-     * HINT: Try using collect() and a Collectors static method!
      *
      * @param recipes a stream of recipes with some duplicates
      * @return a collection with the same recipes just without any duplicate elements
+     * @inheritDoc
      */
-    public static Collection<Recipe> removeDuplicateRecipes(Stream<Recipe> recipes) {
+    @Override
+    public Collection<Recipe> removeDuplicateRecipes(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -66,13 +60,13 @@ public class RecipeCollector {
      * less than 300g sugar.
      * <p>
      * (the amount of sugar measured in grams in a Recipe is returned by the sugar() method)
-     * <p>
-     * HINT: Try using filter()!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the only recipes with less than 300g sugar in them
+     * @inheritDoc
      */
-    public static Collection<Recipe> filterForNotTooSweetRecipes(Stream<Recipe> recipes) {
+    @Override
+    public Collection<Recipe> filterForNotTooSweetRecipes(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -82,26 +76,26 @@ public class RecipeCollector {
      * recipes just the names.
      * <p>
      * (the name of the recipe is returned by the name() method)
-     * <p>
-     * HINT: Try using map() with a method reference!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return a collection of cookie names
+     * @inheritDoc
      */
-    public static Collection<String> getCookieNames(Stream<Recipe> recipes) {
+    @Override
+    public Collection<String> getCookieNames(Stream<Recipe> recipes) {
         return null;
     }
 
     /**
      * So, uh, which cookies contain less than 300g sugar, again?
      * Just give me the names.
-     * <p>
-     * HINT: Try combining filter() and map()!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return a collection of (not too sweet) cookie names
+     * @inheritDoc
      */
-    public static Collection<String> notTooSweetCookieNames(Stream<Recipe> recipes) {
+    @Override
+    public Collection<String> notTooSweetCookieNames(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -109,14 +103,13 @@ public class RecipeCollector {
      * Alright, it seems we are ready to begin production!
      * Management wants to calculate how much sugar we will need.
      * Just add all the sugar together from each recipe.
-     * <p>
-     * HINT: Create an IntStream (with a special mapping method)
-     * from the Stream and then sum it.
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the amount of sugar from each recipe summed
+     * @inheritDoc
      */
-    public static int sugarSumOfRecipes(Stream<Recipe> recipes) {
+    @Override
+    public int sugarSumOfRecipes(Stream<Recipe> recipes) {
         return 0;
     }
 
@@ -129,13 +122,13 @@ public class RecipeCollector {
      * All recipes store their ingredients in a Map<String, Integer>
      * where keys are the ingredient names and values are the amounts.
      * You can get this Map by calling the ingredients() method.
-     * <p>
-     * HINT: Use flatMap(), keySet() and collect(toSet())!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return a collection of ingredients (Strings) without duplicates
+     * @inheritDoc
      */
-    public static Collection<String> listIngredients(Stream<Recipe> recipes) {
+    @Override
+    public Collection<String> listIngredients(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -147,15 +140,15 @@ public class RecipeCollector {
      * rating to every recipe (meaning we _always_ have a 'most
      * difficult' recipe).
      * Can you get us the most difficult recipe only?
-     *
+     * <p>
      * (the difficulty is returned by the 'difficulty()' method)
-     *
-     * HINT: Try using max() and Comparator.comparingInt()!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the recipe with the highest difficulty
+     * @inheritDoc
      */
-    public static Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
+    @Override
+    public Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -164,13 +157,13 @@ public class RecipeCollector {
      * now lets look at both! Create a Map<String, Integer> where
      * the key is the name of the recipe and the value is the
      * amount of sugar in the recipe.
-     * <p>
-     * HINT: Use the toMap() collector!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the map of ingredients with amounts
+     * @inheritDoc
      */
-    public static Map<String, Integer> collectNameAndSugar(Stream<Recipe> recipes) {
+    @Override
+    public Map<String, Integer> collectNameAndSugar(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -181,13 +174,13 @@ public class RecipeCollector {
      * That's not what it's called, though. Some hotshot decided that
      * we should also mash the names together...
      * Can you tell me what the name of this monstrosity will be?
-     * <p>
-     * HINT: Use map() and a special collector made for String!
      *
      * @param recipes a stream of recipes (no duplicates)
      * @return the name of this abomination
+     * @inheritDoc
      */
-    public static String frankenCookie(Stream<Recipe> recipes) {
+    @Override
+    public String frankenCookie(Stream<Recipe> recipes) {
         return null;
     }
 
@@ -198,12 +191,12 @@ public class RecipeCollector {
      * But you can easily tell them that none of our recipes have over
      * 1000g sugar, right?
      *
-     * HINT: Use the noneMatch() or the allMatch() method!
-     *
      * @param recipes a stream of recipes (no duplicates)
      * @return a true/false value indicating whether we will pass the inspection
+     * @inheritDoc
      */
-    public static boolean inspectionSugar(Stream<Recipe> recipes) {
+    @Override
+    public boolean inspectionSugar(Stream<Recipe> recipes) {
         return false;
     }
 
@@ -213,12 +206,12 @@ public class RecipeCollector {
      * At least one of our cookies MUST use... "an impending sense of doom"?
      * What kind of inspector is this?!
      *
-     * HINT: Use the anyMatch() method!
-     *
      * @param recipes a stream of recipes (no duplicates)
      * @return a true/false value indicating if we have any recipes using "an impending sense of doom"
+     * @inheritDoc
      */
-    public static boolean inspectionIngredient(Stream<Recipe> recipes) {
+    @Override
+    public boolean inspectionIngredient(Stream<Recipe> recipes) {
         final String ingredient = "an impending sense of doom";
         return false;
     }
@@ -250,16 +243,13 @@ public class RecipeCollector {
      * |    Milk: 200   |
      * |    Flour: 150  |
      * ------------------
-     * <p>
-     * HINT: Use the reduce() operation! This is a relatively hard task, so
-     * don't fret if you can't do it right away. If you are absolutely stuck,
-     * have a look at the Recipe::merge method.
      *
      * @param recipes a stream of recipes
      * @return the Ultimate Cookie Recipe
+     * @inheritDoc
      */
-    public static Recipe createUltimateRecipe(Stream<Recipe> recipes, Recipe blank) {
+    @Override
+    public Recipe createUltimateRecipe(Stream<Recipe> recipes, Recipe blank) {
         return null;
     }
-
 }
