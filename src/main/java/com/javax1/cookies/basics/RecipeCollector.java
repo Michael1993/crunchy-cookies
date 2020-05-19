@@ -160,7 +160,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      * amount of sugar in the recipe.
      *
      * @param recipes a stream of recipes (no duplicates)
-     * @return the map of ingredients with amounts
+     * @return the map of recipe names with sugar amounts
      * @inheritDoc
      */
     @Override
