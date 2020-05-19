@@ -1,5 +1,6 @@
 package com.javax1.cookies.advanced;
 
+import com.javax1.cookies.basics.CookieFactory;
 import com.javax1.cookies.secrets.Cookie;
 import com.javax1.cookies.secrets.stores.CookieStore;
 import com.javax1.cookies.secrets.supplier.CookieSupplier;

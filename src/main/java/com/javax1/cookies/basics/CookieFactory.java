@@ -1,4 +1,4 @@
-package com.javax1.cookies.advanced;
+package com.javax1.cookies.basics;
 
 import com.javax1.cookies.secrets.Cookie;
 import com.javax1.cookies.secrets.hints.CookieFactoryHints;
