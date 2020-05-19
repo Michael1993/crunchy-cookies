@@ -17,6 +17,14 @@ instructions in the different packages. We recommend NOT looking into the
 `com.javax1.cookies.secrets` package and running the unit tests to validate your
 results.
 
+If you feel stuck, check the documentation on the "Hint" interface the class your
+problem is in is implementing. Most IDEs let you do that with hovering your mouse
+over the method.
+
+If you just want the solutions, there is a "solutions" branch with my solutions. 
+This was made by a single person, so it might not fit your needs and needs to be 
+evaluated before applying to real world problems.
+
 Eldritch means unearthly, supernatural or eerie.
 Popularized by the works of H. P. Lovecraft.
 
