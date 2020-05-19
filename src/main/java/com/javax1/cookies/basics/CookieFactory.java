@@ -4,6 +4,7 @@ import com.javax1.cookies.secrets.Cookie;
 import com.javax1.cookies.secrets.hints.CookieFactoryHints;
 import com.javax1.cookies.secrets.supplier.CookieSupplier;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -29,7 +30,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> cookieStream(Cookie[] cookies) {
-        return null;
+        return Stream.of(cookies);
     }
 
     /**
@@ -42,7 +43,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public IntStream ratingsToStream(int[] ratings) {
-        return null;
+        return Arrays.stream(ratings);
     }
 
     /**
@@ -56,7 +57,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> multipleCookieBatchesToStream(Cookie[]... batches) {
-        return null;
+        return Stream.of(batches).flatMap(Stream::of);
     }
 
     /**
@@ -71,7 +72,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> combiningStreams(Stream<Cookie> firstBatch, Stream<Cookie> secondBatch) {
-        return null;
+        return Stream.concat(firstBatch, secondBatch);
     }
 
     /**
@@ -86,7 +87,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> suppliedCookies(CookieSupplier cookieSupplier) {
-        return null;
+        return Stream.generate(cookieSupplier);
     }
 
     /**
@@ -101,7 +102,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> faultySuppliedCookies(CookieSupplier cookieSupplier) {
-        return null;
+        return Stream.generate(cookieSupplier).skip(3);
     }
 
     /**
@@ -118,7 +119,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> moreFaultySuppliedCookies(CookieSupplier cookieSupplier) {
-        return null;
+        return Stream.generate(cookieSupplier).dropWhile(cookie -> cookie.category().equals(Cookie.Category.ELDRITCH));
     }
 
     /**
@@ -136,7 +137,7 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> limitedCookieStream(CookieSupplier cookieSupplier) {
-        return null;
+        return Stream.generate(cookieSupplier).limit(12);
     }
 
     /**
@@ -156,6 +157,6 @@ public class CookieFactory implements CookieFactoryHints {
      */
     @Override
     public Stream<Cookie> sentienceGainingCookieSupplier(CookieSupplier cookieSupplier) {
-        return null;
+        return Stream.generate(cookieSupplier).takeWhile(cookie -> !cookie.category().equals(Cookie.Category.ELDRITCH));
     }
 }

@@ -3,8 +3,11 @@ package com.javax1.cookies.advanced;
 import com.javax1.cookies.secrets.Cookie;
 import com.javax1.cookies.secrets.hints.CookieManagerHints;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -24,7 +27,7 @@ public class CookieManager implements CookieManagerHints {
      */
     @Override
     public Map<Cookie.Category, List<Cookie>> groupedByCookieCategory(Stream<Cookie> cookies) {
-        return null;
+        return cookies.collect(Collectors.groupingBy(Cookie::category));
     }
 
     /**
@@ -41,7 +44,12 @@ public class CookieManager implements CookieManagerHints {
      */
     @Override
     public Map<Cookie.Category, Cookie> groupedAndHighestRated(Stream<Cookie> cookies, Cookie unrated) {
-        return null;
+        return cookies.collect(
+                Collectors.groupingBy(
+                        Cookie::category,
+                        Collectors.reducing(unrated, BinaryOperator.maxBy(Comparator.comparingInt(Cookie::rating)))
+                )
+        );
     }
 
     /**
@@ -59,7 +67,11 @@ public class CookieManager implements CookieManagerHints {
      */
     @Override
     public List<Cookie> minMaxRatedCookies(Stream<Cookie> cookies) {
-        return null;
+        return cookies.collect(Collectors.teeing(
+                Collectors.minBy(Comparator.comparingInt(Cookie::rating)),
+                Collectors.maxBy(Comparator.comparingInt(Cookie::rating)),
+                (cookie1, cookie2) -> List.of(cookie1.get(), cookie2.get()))
+        );
     }
 
     /**
@@ -75,7 +87,7 @@ public class CookieManager implements CookieManagerHints {
      */
     @Override
     public List<Cookie> topThreeCookies(Stream<Cookie> cookies) {
-        return null;
+        return cookies.sorted(Comparator.comparingInt(Cookie::rating).reversed()).limit(3).collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -91,7 +103,7 @@ public class CookieManager implements CookieManagerHints {
      */
     @Override
     public Cookie topCookieOfCategory(Stream<Cookie> cookies) {
-        return null;
+        return cookies.filter(cookie -> cookie.category().equals(Cookie.Category.ELDRITCH)).max(Comparator.comparingInt(Cookie::rating)).get();
     }
 
 }

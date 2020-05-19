@@ -4,7 +4,9 @@ import com.javax1.cookies.secrets.Recipe;
 import com.javax1.cookies.secrets.hints.RecipeCollectorHints;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -26,7 +28,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public long countRecipes(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.count();
     }
 
     /**
@@ -39,7 +41,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public long uniqueRecipeCount(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.distinct().count();
     }
 
     /**
@@ -52,7 +54,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<Recipe> removeDuplicateRecipes(Stream<Recipe> recipes) {
-        return null;
+        return recipes.collect(Collectors.toUnmodifiableSet());
     }
 
     /**
@@ -68,7 +70,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<Recipe> filterForNotTooSweetRecipes(Stream<Recipe> recipes) {
-        return null;
+        return recipes.filter(recipe -> recipe.sugar() < 300).collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -84,7 +86,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> getCookieNames(Stream<Recipe> recipes) {
-        return null;
+        return recipes.map(Recipe::name).collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -97,7 +99,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> notTooSweetCookieNames(Stream<Recipe> recipes) {
-        return null;
+        return recipes.filter(recipe -> recipe.sugar() < 300).map(Recipe::name).collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -111,7 +113,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public int sugarSumOfRecipes(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.mapToInt(Recipe::sugar).sum();
     }
 
     /**
@@ -130,7 +132,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> listIngredients(Stream<Recipe> recipes) {
-        return null;
+        return recipes.flatMap(recipe -> recipe.ingredients().keySet().stream()).collect(Collectors.toUnmodifiableSet());
     }
 
     /**
@@ -144,13 +146,13 @@ public class RecipeCollector implements RecipeCollectorHints {
      * <p>
      * (the difficulty is returned by the 'difficulty()' method)
      *
-     * @param recipes a stream of recipes (no duplicates)
+     * @param recipes a stream of recipes (no duplicates, at least one element)
      * @return the recipe with the highest difficulty
      * @inheritDoc
      */
     @Override
     public Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
-        return null;
+        return recipes.max(Comparator.comparingInt(Recipe::difficulty)).get();
     }
 
     /**
@@ -165,7 +167,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Map<String, Integer> collectNameAndSugar(Stream<Recipe> recipes) {
-        return null;
+        return recipes.collect(Collectors.toMap(Recipe::name, Recipe::sugar));
     }
 
     /**
@@ -182,7 +184,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public String frankenCookie(Stream<Recipe> recipes) {
-        return null;
+        return recipes.map(Recipe::name).collect(Collectors.joining());
     }
 
     /**
@@ -198,7 +200,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public boolean inspectionSugar(Stream<Recipe> recipes) {
-        return false;
+        return recipes.noneMatch(recipe -> recipe.sugar() > 1000);
     }
 
     /**
@@ -214,7 +216,7 @@ public class RecipeCollector implements RecipeCollectorHints {
     @Override
     public boolean inspectionIngredient(Stream<Recipe> recipes) {
         final String ingredient = "an impending sense of doom";
-        return false;
+        return recipes.anyMatch(recipe -> recipe.ingredients().containsKey(ingredient));
     }
 
     /**
@@ -249,6 +251,14 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Recipe createUltimateRecipe(Stream<Recipe> recipes, Recipe blank) {
-        return null;
+        return recipes.reduce(
+                blank,
+                (result, recipe) -> {
+                    recipe.ingredients().forEach(
+                            (ingredient, amount) -> result.ingredients().merge(ingredient, amount, Math::max)
+                    );
+                    return result;
+                }
+        );
     }
 }
