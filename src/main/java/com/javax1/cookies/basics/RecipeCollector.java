@@ -191,30 +191,12 @@ public class RecipeCollector implements RecipeCollectorHints {
 
       //  Stream<Recipe> lowSugarReciepes = filterForNotTooSweetRecipes(recipes).stream();
 
-        HashMap<String, Integer> lowSugarNameAndSugar = new HashMap<String, Integer>();
+        HashMap<String, Integer> nameAndSugar = new HashMap<String, Integer>();
 
 
-        filterForNotTooSweetRecipes(recipes).stream().forEach(r -> {lowSugarNameAndSugar.put(r.name(), r.sugar());});
+        recipes.forEach(r -> {nameAndSugar.put(r.name(), r.sugar());});
 
-        return lowSugarNameAndSugar;
-
-        /*
-        I call the expected result to be wrong. The text says that only low sugar reciepes should be returned
-
-        >> Previously we looked at recipe names and low-sugar recipes, now lets look at both
-
-        java.lang.AssertionError:
-Expecting:
-  <{"Mayan Molasses"=200, "Power Puff Muffin"=200}>
-to contain only:
-  <[Mayan Molasses=200,
-    Power Puff Muffin=200,
-    Classical Cookie=300,
-    Mouthwatering Macaroons=500]>
-but could not find the following elements:
-  <[MapEntry[key="Classical Cookie", value=300],
-    MapEntry[key="Mouthwatering Macaroons", value=500]]>
-         */
+        return nameAndSugar;
 
     }
 
@@ -249,7 +231,7 @@ but could not find the following elements:
      */
     @Override
     public boolean inspectionSugar(Stream<Recipe> recipes) {
-        return (recipes.filter(r -> r.sugar() > 1000).count() == 0);
+        return recipes.noneMatch(r -> r.sugar() > 1000);
     }
 
     /**
@@ -265,7 +247,7 @@ but could not find the following elements:
     @Override
     public boolean inspectionIngredient(Stream<Recipe> recipes) {
         final String ingredient = "an impending sense of doom";
-        return recipes.filter(r -> r.ingredients().containsKey(ingredient)).count() > 0;
+        return recipes.anyMatch(r -> r.ingredients().containsKey(ingredient));
     }
 
     /**
