@@ -300,6 +300,17 @@ but could not find the following elements:
      */
     @Override
     public Recipe createUltimateRecipe(Stream<Recipe> recipes, Recipe blank) {
-        return null;
+
+        recipes.forEach(r -> r.ingredients().forEach((key, value) -> {
+            if(blank.ingredients().containsKey(key)) {
+                if(blank.ingredients().get(key) < value) {
+                    blank.ingredients().replace(key, value);
+                }
+            } else {
+                blank.ingredients().put(key, value);
+            }
+        }));
+
+        return blank;
     }
 }
