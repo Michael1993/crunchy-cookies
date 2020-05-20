@@ -3,8 +3,11 @@ package com.javax1.cookies.basics;
 import com.javax1.cookies.secrets.Recipe;
 import com.javax1.cookies.secrets.hints.RecipeCollectorHints;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -26,7 +29,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public long countRecipes(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.count();
     }
 
     /**
@@ -39,7 +42,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public long uniqueRecipeCount(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.distinct().count();
     }
 
     /**
@@ -52,7 +55,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<Recipe> removeDuplicateRecipes(Stream<Recipe> recipes) {
-        return null;
+        return recipes.distinct().collect(Collectors.toList());
     }
 
     /**
@@ -68,7 +71,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<Recipe> filterForNotTooSweetRecipes(Stream<Recipe> recipes) {
-        return null;
+        return recipes.filter(e -> e.sugar() < 300).collect(Collectors.toList());
     }
 
     /**
@@ -84,7 +87,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> getCookieNames(Stream<Recipe> recipes) {
-        return null;
+        return recipes.map(Recipe::name).collect(Collectors.toList());
     }
 
     /**
@@ -97,7 +100,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> notTooSweetCookieNames(Stream<Recipe> recipes) {
-        return null;
+        return recipes.filter(e -> e.sugar() < 300).map(Recipe::name).collect(Collectors.toList());
     }
 
     /**
@@ -111,7 +114,7 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public int sugarSumOfRecipes(Stream<Recipe> recipes) {
-        return 0;
+        return recipes.distinct().mapToInt(Recipe::sugar).sum();
     }
 
     /**
@@ -130,7 +133,16 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Collection<String> listIngredients(Stream<Recipe> recipes) {
-        return null;
+
+        Collection<String> allIngredients = new ArrayList<>();
+
+        Collection<Recipe> list = recipes.collect(Collectors.toList());
+
+        for (Recipe recipe : list) {
+            allIngredients.addAll(recipe.ingredients().keySet());
+        }
+
+        return allIngredients.stream().distinct().collect(Collectors.toList());
     }
 
     /**
@@ -150,7 +162,12 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
-        return null;
+
+        List<Recipe> streamAsListToBeUsedAgain = recipes.collect(Collectors.toList());
+
+        int maxDifficultiy = streamAsListToBeUsedAgain.stream().mapToInt(Recipe::difficulty).max().getAsInt();
+
+        return streamAsListToBeUsedAgain.stream().filter(r -> r.difficulty() == maxDifficultiy).findFirst().get();
     }
 
     /**
