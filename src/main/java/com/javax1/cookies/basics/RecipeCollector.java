@@ -5,6 +5,7 @@ import com.javax1.cookies.secrets.hints.RecipeCollectorHints;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -134,15 +135,18 @@ public class RecipeCollector implements RecipeCollectorHints {
     @Override
     public Collection<String> listIngredients(Stream<Recipe> recipes) {
 
-        Collection<String> allIngredients = new ArrayList<>();
+//        Collection<String> allIngredients = new ArrayList<>();
+//
+//        Collection<Recipe> list = recipes.collect(Collectors.toList());
+//
+//        for (Recipe recipe : list) {
+//            allIngredients.addAll(recipe.ingredients().keySet());
+//        }
+//
+//        return allIngredients.stream().distinct().collect(Collectors.toList());
 
-        Collection<Recipe> list = recipes.collect(Collectors.toList());
+        return recipes.flatMap(r -> r.ingredients().keySet().stream()).distinct().collect(Collectors.toList());
 
-        for (Recipe recipe : list) {
-            allIngredients.addAll(recipe.ingredients().keySet());
-        }
-
-        return allIngredients.stream().distinct().collect(Collectors.toList());
     }
 
     /**
@@ -163,11 +167,12 @@ public class RecipeCollector implements RecipeCollectorHints {
     @Override
     public Recipe mostDifficultRecipe(Stream<Recipe> recipes) {
 
-        List<Recipe> streamAsListToBeUsedAgain = recipes.collect(Collectors.toList());
-
-        int maxDifficultiy = streamAsListToBeUsedAgain.stream().mapToInt(Recipe::difficulty).max().getAsInt();
-
-        return streamAsListToBeUsedAgain.stream().filter(r -> r.difficulty() == maxDifficultiy).findFirst().get();
+//        List<Recipe> streamAsListToBeUsedAgain = recipes.collect(Collectors.toList());
+//
+//        int maxDifficultiy = streamAsListToBeUsedAgain.stream().mapToInt(Recipe::difficulty).max().getAsInt();
+//
+//        return streamAsListToBeUsedAgain.stream().filter(r -> r.difficulty() == maxDifficultiy).findFirst().get();
+        return recipes.sorted(Comparator.comparingInt(Recipe::difficulty).reversed()).findFirst().get();
     }
 
     /**
@@ -182,6 +187,10 @@ public class RecipeCollector implements RecipeCollectorHints {
      */
     @Override
     public Map<String, Integer> collectNameAndSugar(Stream<Recipe> recipes) {
+
+
+
+
         return null;
     }
 
