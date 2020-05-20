@@ -232,7 +232,8 @@ but could not find the following elements:
      */
     @Override
     public String frankenCookie(Stream<Recipe> recipes) {
-        return null;
+        // return recipes.collect(Collectors.joining(Recipe::name));
+        return recipes.map(Recipe::name).collect(Collectors.joining());
     }
 
     /**
@@ -248,7 +249,7 @@ but could not find the following elements:
      */
     @Override
     public boolean inspectionSugar(Stream<Recipe> recipes) {
-        return false;
+        return (recipes.filter(r -> r.sugar() > 1000).count() == 0);
     }
 
     /**
@@ -264,7 +265,7 @@ but could not find the following elements:
     @Override
     public boolean inspectionIngredient(Stream<Recipe> recipes) {
         final String ingredient = "an impending sense of doom";
-        return false;
+        return recipes.filter(r -> r.ingredients().containsKey(ingredient)).count() > 0;
     }
 
     /**
