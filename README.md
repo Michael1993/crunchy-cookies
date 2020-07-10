@@ -20,10 +20,7 @@ and "a sense of impending doom").
 This repository is for people who have a basic understanding of the Stream API
 but would like to reinforce that knowledge with exercises.
 
-I intend to make a video that guides through the problems, demonstrating the
-Stream API so this repository can be used by newcomers.
- 
-<!-- TODO: Rewrite this section and link the video when it's done. -->
+If you are unfamiliar with the Stream API, here is [a good video to get you started](https://www.twitch.tv/videos/632600397).
 
 This repository does not offer an explanation on how the Stream API works, at all.
 This is strictly for familiarizing yourself with the API.
