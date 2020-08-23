@@ -6,7 +6,7 @@ implementation of the Stream API.
 
 ## Background
 
-The Crunchy Cookie Company is in trouble and it needs your help to figure out how 
+The Crunchy Cookie Company is in trouble, and it needs your help to figure out how 
 to solve its problems. It needs to handle data in several different ways.
 
 Java Streams to the rescue!
@@ -20,7 +20,7 @@ and "a sense of impending doom").
 This repository is for people who have a basic understanding of the Stream API
 but would like to reinforce that knowledge with exercises.
 
-If you are unfamiliar with the Stream API, here is [a good video to get you started](https://www.twitch.tv/videos/632600397).
+If you are unfamiliar with the Stream API, these exercises are probably not for you. :(
 
 This repository does not offer an explanation on how the Stream API works, at all.
 This is strictly for familiarizing yourself with the API.
